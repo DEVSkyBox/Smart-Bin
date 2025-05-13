@@ -110,7 +110,7 @@ void loop() {
     String jsonPayload;
     serializeJson(doc, jsonPayload);
 
-    // Send to Supabase
+    // Send to database
     HTTPClient http;
     String endpoint = String(databaseUrl) + "/rest/v1/" + tableName;
 
@@ -206,7 +206,7 @@ void cover_motion(){
     String jsonPayload;
     serializeJson(doc, jsonPayload);
 
-    // Send to Supabase
+    // Send to database
     HTTPClient http;
     String endpoint = String(databaseUrl) + "/rest/v1/" + tableName;
 
