@@ -12,9 +12,9 @@
 const char* ssid = "Galaxy S107f05";
 const char* password = "12345678";
 
-// Supabase details
-const char* supabaseUrl = "https://etdeshtouwkjilpppulx.supabase.co";
-const char* supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0ZGVzaHRvdXdramlscHBwdWx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQzMjY5NjcsImV4cCI6MjA1OTkwMjk2N30.j9FjpD_dzBBHsXQ0zBv1QjIQTjQ21QeJQUP3GrG2Eq0";
+// Database details
+const char* databaseUrl = "your database url";
+const char* databaseKey = "your database key";
 const char* tableName = "SmartBinData";
 
 // Sensor Pins
@@ -105,7 +105,6 @@ void loop() {
     // Create JSON payload
     DynamicJsonDocument doc(1024);
     doc["Wastepercentage"] = Wastepercentage;
-   // doc["Batteryvoltage"] = Batteryvoltage;
     doc["Batterypercentage"] = Batterypercentage;
 
     String jsonPayload;
@@ -113,18 +112,18 @@ void loop() {
 
     // Send to Supabase
     HTTPClient http;
-    String endpoint = String(supabaseUrl) + "/rest/v1/" + tableName;
+    String endpoint = String(databaseUrl) + "/rest/v1/" + tableName;
 
     http.begin(endpoint);
     http.addHeader("Content-Type", "application/json");
-    http.addHeader("apikey", supabaseKey);
-    http.addHeader("Authorization", "Bearer " + String(supabaseKey));
+    http.addHeader("apikey", databaseKey);
+    http.addHeader("Authorization", "Bearer " + String(databaseKey));
     http.addHeader("Prefer", "return=minimal"); // Suppress response body
 
     int httpCode = http.POST(jsonPayload);
 
     if (httpCode == HTTP_CODE_CREATED) {
-      Serial.println("Data sent to Supabase!");
+      Serial.println("Data sent to Database!");
     } else {
       Serial.printf("Error: %s\n", http.errorToString(httpCode).c_str());
     }
@@ -202,7 +201,6 @@ void cover_motion(){
     // Create JSON payload
     DynamicJsonDocument doc(1024);
     doc["Wastepercentage"] = Wastepercentage;
-   // doc["Batteryvoltage"] = Batteryvoltage;
     doc["Batterypercentage"] = Batterypercentage;
 
     String jsonPayload;
@@ -210,18 +208,18 @@ void cover_motion(){
 
     // Send to Supabase
     HTTPClient http;
-    String endpoint = String(supabaseUrl) + "/rest/v1/" + tableName;
+    String endpoint = String(databaseUrl) + "/rest/v1/" + tableName;
 
     http.begin(endpoint);
     http.addHeader("Content-Type", "application/json");
-    http.addHeader("apikey", supabaseKey);
-    http.addHeader("Authorization", "Bearer " + String(supabaseKey));
+    http.addHeader("apikey", databaseKey);
+    http.addHeader("Authorization", "Bearer " + String(databaseKey));
     http.addHeader("Prefer", "return=minimal"); // Suppress response body
 
     int httpCode = http.POST(jsonPayload);
 
     if (httpCode == HTTP_CODE_CREATED) {
-      Serial.println("Data sent to Supabase!");
+      Serial.println("Data sent to Database!");
     } else {
       Serial.printf("Error: %s\n", http.errorToString(httpCode).c_str());
     }
