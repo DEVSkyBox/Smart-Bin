@@ -9,8 +9,8 @@
 #include <Wire.h>
 
 // WiFi Credentials
-const char* ssid = "Galaxy S107f05";
-const char* password = "12345678";
+const char* ssid = "your ssid";
+const char* password = "your password";
 
 // Database details
 const char* databaseUrl = "your database url";
